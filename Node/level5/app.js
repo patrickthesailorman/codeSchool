@@ -41,17 +41,19 @@
 // });
 
 // app.listen(8080);
+
+
 var url = require('url');
 
-options = {
-  // add URL options here
+var options = {
   protocol: "http:",
   host: "search.twitter.com",
   pathname: '/search.json',
-  query: {
-    q: "codeschool"
-  }
+  query: { q: "codeschool"}
 };
 
 var searchURL = url.format(options);
-console.log(searchURL);
+var request = require('request');
+request(searchURL, function(err, response, body) {
+     console.log(body);                        
+});
