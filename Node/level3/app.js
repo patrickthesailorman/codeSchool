@@ -10,13 +10,22 @@
 
 // file.pipe(process.stdout);
 
+// var fs = require('fs');
+
+// var file = fs.createReadStream('origin.txt');
+// var destFile = fs.createWriteStream('destination.txt');
+
+// file.pipe(destFile, {end: false});
+
+// file.on('end', function(){
+//   destFile.end('Finished!');
+// });
 var fs = require('fs');
+var http = require('http');
 
-var file = fs.createReadStream('origin.txt');
-var destFile = fs.createWriteStream('destination.txt');
+http.createServer(function(request, response) {
+  response.writeHead(200, {'Content-Type': 'text/html'});
 
-file.pipe(destFile, {end: false});
-
-file.on('end', function(){
-  destFile.end('Finished!');
-});
+  var file = fs.createReadStream('index.html');
+  file.pipe(response);
+}).listen(8080);
