@@ -43,17 +43,40 @@
 // app.listen(8080);
 
 
+// var url = require('url');
+
+// var options = {
+//   protocol: "http:",
+//   host: "search.twitter.com",
+//   pathname: '/search.json',
+//   query: { q: "codeschool"}
+// };
+
+// var searchURL = url.format(options);
+// var request = require('request');
+// request(searchURL, function(err, response, body) {
+//      console.log(body);                        
+// });
+
 var url = require('url');
+var request = require('request');
+var express = require('express');
 
 var options = {
   protocol: "http:",
   host: "search.twitter.com",
   pathname: '/search.json',
-  query: { q: "codeschool"}
+  query: {
+    q: "codeschool"
+  }
 };
 
 var searchURL = url.format(options);
-var request = require('request');
-request(searchURL, function(err, response, body) {
-     console.log(body);                        
+
+var app = express();// Create server here
+
+app.get('/', function(req, res) {
+  request(searchURL).pipe(res);
 });
+
+app.listen(8080);
