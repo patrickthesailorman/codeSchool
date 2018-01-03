@@ -43,7 +43,9 @@ io.sockets.on('connection', function(client) {
       client.question_asked = true;
       client.broadcast.emit('question', question);
       // add the question to the list here
-      redisClient.lpush('questions', question);
+      redisClient.lpush("questions", question, function() {
+        redisClient.ltrim('questions', 0, 19);
+      });
     }
   });
 });
