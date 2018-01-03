@@ -5,7 +5,10 @@ var io = require('socket.io')(server);
 io.on('connection', function(client) {
   console.log("Client connected...");
   client.on('question', function(question) {
-    client.broadcast.emit('question', question);
+    if (!client.question_asked) {
+      client.broadcast.emit('question', question);
+      client.question_asked = true;
+    }
   });
   
 });
