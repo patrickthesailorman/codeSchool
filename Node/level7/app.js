@@ -29,6 +29,11 @@ var redis = require('redis');
 var redisClient = redis.createClient();
 
 io.sockets.on('connection', function(client) {
+    redisClient.lrange('questions', 0, -1, function(err, questions) {
+    questions.forEach(function(question) {
+      client.emit('question', question);
+    });
+  });
   client.on('answer', function(question, answer) {
     client.broadcast.emit('answer', question, answer);
   });
