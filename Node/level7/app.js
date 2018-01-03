@@ -14,3 +14,7 @@ client.lpush("questions", question1, function(err, reply) {
 client.lpush("questions", question2, function(err, reply) {
   console.log(reply);
 });
+
+client.lrange('questions', 0, -1, function(err, questions) {
+  console.log(questions);
+});   
