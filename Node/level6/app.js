@@ -4,6 +4,11 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 io.on('connection', function(client) {
   console.log("Client connected...");
+  
+  client.on('answer', function(question, answer) {
+    client.broadcast.emit('answer', question, answer);
+  });
+  
   client.on('question', function(question) {
     if (!client.question_asked) {
       client.broadcast.emit('question', question);
