@@ -1,25 +1,22 @@
-// var express = require('express');
-// var app = express();
-
-// app.get('/cities', function (request, response) {                                                                                                     
-//   var cities = ['Caspiana', 'Indigo', 'Paradise'];
-//   response.send(cities);
-// });
-// app.get('/locations', function(request, response){
-//   response.redirect(301, '/cities');
-// });
-
-
-// app.listen(3001, function () {
-//   console.log("Running Express");
-// });
 var express = require('express');
 var app = express();
 
-app.use(express.static('public'));
-app.get('/cities', function(req, res){
-  var cities = ['Lotopia', 'Caspiana', 'Indigo'];
-  res.send(cities);
+var cities = ['Caspiana', 'Indigo', 'Paradise'];
+
+app.get('/cities', function(request, response) {
+  if(request.query.search) {
+    response.json(citySearch(request.query.search));
+  }
 });
 
-app.listen(3001);
+function citySearch (keyword) {
+  var regexp = RegExp(keyword, 'i');
+  var result = cities.filter(function (city) {
+    return city.match(regexp);
+  });
+
+  return result;
+}
+
+app.listen(3000);
+
