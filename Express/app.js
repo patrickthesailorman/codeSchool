@@ -1,30 +1,36 @@
 var express = require('express');
 var app = express();
 
-var cities = {
-  'Lotopia': 'Rough and mountainous',
-  'Caspiana': 'Sky-top island',
-  'Indigo': 'Vibrant and thriving',
-  'Paradise': 'Lush, green plantation',
-  'Flotilla': 'Bustling urban oasis'
-};
-
-app.get('/cities/:name', function (request, response) {
-  var cityName = parseCityName(request.params.name);
-  var cityInfo = cities[cityName];
-
-  if(cityInfo) {
-    response.json(cityInfo);
+app.param('year', function(request, response, next){
+  if(isYearFormat(request.params.year)){
+    next();
   } else {
-    response.status(404).json('City not found');
+    response.status(400).json('Invalid Format for Year');
   }
 });
 
-function parseCityName(name) {
-  var parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
-  return parsedName;
+var citiesYear = {
+  5000: 'Lotopia',
+  5100: 'Caspiana',
+  5105: 'Indigo',
+  6000: 'Paradise',
+  7000: 'Flotilla'
+};
+
+function isYearFormat(value) {
+  var regexp = RegExp(/^d{4}$/);
+  return regexp.test(value);
 }
 
-app.listen(3000);  
+app.get('/cities/year/:year', function(request, response) {
+  var year = request.params.year;
+  var city = citiesYear[year];
 
+  if(!city) {
+    response.status(404).json("No City found for given year");
+  } else {
+    response.json("In " + year + ", " + city + " is created.");
+  }
+});
 
+app.listen(3000);                                                                                                                                                                                                                                                                                                               
