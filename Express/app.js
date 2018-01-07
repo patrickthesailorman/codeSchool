@@ -1,36 +1,16 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({ extended: false});
 
-app.param('year', function(request, response, next){
-  if(isYearFormat(request.params.year)){
-    next();
-  } else {
-    response.status(400).json('Invalid Format for Year');
-  }
+app.post('/cities', parseUrlencoded, function (request, response) {
+  var city = createCity(request.body.name, request.body.description);
+  response.status(201).json(city);
 });
 
-var citiesYear = {
-  5000: 'Lotopia',
-  5100: 'Caspiana',
-  5105: 'Indigo',
-  6000: 'Paradise',
-  7000: 'Flotilla'
-};
+app.listen(3000);
 
-function isYearFormat(value) {
-  var regexp = RegExp(/^d{4}$/);
-  return regexp.test(value);
-}
-
-app.get('/cities/year/:year', function(request, response) {
-  var year = request.params.year;
-  var city = citiesYear[year];
-
-  if(!city) {
-    response.status(404).json("No City found for given year");
-  } else {
-    response.json("In " + year + ", " + city + " is created.");
-  }
-});
-
-app.listen(3000);                                                                                                                                                                                                                                                                                                               
+var createCity = function(name, description){
+  cities[name] = description;
+  return name; 
+};                                                                                                                                                                                                                                                                                                             
