@@ -10,14 +10,21 @@ var cities = {
 };
 
 app.get('/cities/:name', function (request, response) {
-  var cityInfo = cities[request.params.name];
+  var cityName = parseCityName(request.params.name);
+  var cityInfo = cities[cityName];
+
   if(cityInfo) {
     response.json(cityInfo);
   } else {
-    response.status(404).json("City not found");
+    response.status(404).json('City not found');
   }
 });
 
-app.listen(3000);
+function parseCityName(name) {
+  var parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  return parsedName;
+}
+
+app.listen(3000);  
 
 
