@@ -1,16 +1,30 @@
 var express = require('express');
 var app = express();
 
-var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({ extended: false });
+var cities = {
+  'Lotopia': 'Rough and mountainous',
+  'Caspiana': 'Sky-top island',
+  'Indigo': 'Vibrant and thriving',
+  'Paradise': 'Lush, green plantation',
+  'Flotilla': 'Bustling urban oasis'
+};
 
-app.post('/cities', parseUrlencoded, function (request, response) {
-  if(request.body.description.length > 4){
-  var city = createCity(request.body.name, request.body.description);
-  response.status(201).json(city);
-    } else {
-      response.status(400).json('Invalid City');
-    }
+app.param('name', function (request, response, next) {
+  request.cityName = parseCityName(request.params.name);
 });
+ app.delete('/cities/:name', function(request, response){
+  if (cities[request.cityName]) {
+  delete cities[request.cityName];
+  response.sendStatus(200);
+    } else {
+      response.sendStatus(404);
+    }
+});      
+
 
 app.listen(3000);
+
+function parseCityName(name) {
+  var parsedName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+  return parsedName;
+}
