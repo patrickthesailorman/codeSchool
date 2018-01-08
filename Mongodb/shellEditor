@@ -72,3 +72,9 @@ db.wands.find(
     "powers": {"$ne": "Love Burst"}
   }
 )
+
+db.wands.find(
+  {
+    "damage.melee": {"$gte": 30, "$lte": 40}
+  }
+)
