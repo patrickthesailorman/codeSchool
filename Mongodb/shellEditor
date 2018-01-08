@@ -27,3 +27,8 @@ db.wands.update(
   {"$rename": {"creator": "maker"}},
   {"multi": true}
 )
+
+db.wands.update(
+  {"name": "Dream Bender"},
+  {"$set": {"powers.0": "Fire Deflection"}}
+)
