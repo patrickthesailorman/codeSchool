@@ -78,3 +78,9 @@ db.wands.find(
     "damage.melee": {"$gte": 30, "$lte": 40}
   }
 )
+
+db.wands.find(
+  {
+    "lengths": {"$elemMatch":{"$gte": 2.5, "$lt": 3}}
+  }
+)
