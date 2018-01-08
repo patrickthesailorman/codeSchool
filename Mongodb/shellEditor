@@ -43,3 +43,9 @@ db.wands.update(
   {"name": "Dream Bender"},
   {"$push": {"powers": "Spell Casting"}}
 )
+
+db.wands.update(
+  {},
+  {"$addToSet": {"powers": "Spell Casting"}},
+  {"multi": true}
+)
