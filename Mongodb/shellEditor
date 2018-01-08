@@ -15,3 +15,9 @@ db.wands.update(
   {"$inc":{"level_required": 2}},
   {"multi": true}
 )
+
+db.logs.update(
+  {"name": "Dream Bender"},
+  {"$inc": {"count": 1}},
+  {"upsert": true}
+)
