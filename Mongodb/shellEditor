@@ -7,3 +7,11 @@ db.wands.insert({
   "damage": {"magic": 4, "melee": 2}
   
 })
+
+db.wands.update({"name": "Devotion Shift"}, {"$set":{"price": 5.99}})
+
+db.wands.update(
+  {"powers": "Fire"},
+  {"$inc":{"level_required": 2}},
+  {"multi": true}
+)
