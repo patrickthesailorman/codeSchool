@@ -32,3 +32,10 @@ db.wands.update(
   {"name": "Dream Bender"},
   {"$set": {"powers.0": "Fire Deflection"}}
 )
+
+db.wands.update(
+  {"powers": "Love"},
+  {"$set": {"powers.$": "Love Burst"}},
+  {"multi": true}
+)
+
