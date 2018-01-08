@@ -21,3 +21,9 @@ db.logs.update(
   {"$inc": {"count": 1}},
   {"upsert": true}
 )
+
+db.wands.update(
+  {},
+  {"$rename": {"creator": "maker"}},
+  {"multi": true}
+)
