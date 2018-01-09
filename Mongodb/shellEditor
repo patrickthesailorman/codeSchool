@@ -104,3 +104,5 @@ db.wands.find({"level_required": 2}).count()
 
 db.wands.find( 
   {}).sort({"price": -1}).limit(3)
+  
+  db.wands.aggregate( [ { $group: {"_id": "$maker"} } ] )
