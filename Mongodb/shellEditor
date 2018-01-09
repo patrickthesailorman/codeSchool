@@ -111,3 +111,9 @@ db.wands.find(
   {"$group": {"_id": "$damage.magic",
              "wand_count": {"$sum": 1}} } 
  ])
+ 
+ db.wands.aggregate([
+  {"$group": {"_id": "$maker",
+   "total_cost": {"$sum": "$price"}
+  }}
+])
