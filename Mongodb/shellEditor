@@ -101,3 +101,6 @@ db.wands.find(
 db.wands.find({}, {"name": true, "powers": true, "_id": false})
 
 db.wands.find({"level_required": 2}).count()
+
+db.wands.find( 
+  {}).sort({"price": -1}).limit(3)
