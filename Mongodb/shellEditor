@@ -84,3 +84,12 @@ db.wands.find(
     "lengths": {"$elemMatch":{"$gte": 2.5, "$lt": 3}}
   }
 )
+
+db.wands.find(
+   {
+    "maker": {"$ne": "Foxmond"},
+    "level_required": {"$lte": 75},
+    "price": {"$lt": 50},
+    "lengths": {"$elemMatch": {"$gte": 3, "$lte": 4}}
+  }
+)
