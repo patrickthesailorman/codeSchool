@@ -97,3 +97,5 @@ db.wands.find(
 db.wands.find(
   {},
 {"name": true}).sort({"name": 1})
+
+db.wands.find({}, {"name": true, "powers": true, "_id": false})
