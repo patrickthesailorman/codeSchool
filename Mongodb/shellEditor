@@ -117,3 +117,10 @@ db.wands.find(
    "total_cost": {"$sum": "$price"}
   }}
 ])
+
+db.wands.aggregate([
+  {"$group": {
+    "_id": "$level_required",
+  "price_average": {"$avg": "$price"}           
+  }}
+])
