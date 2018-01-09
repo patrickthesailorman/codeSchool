@@ -139,3 +139,12 @@ db.wands.aggregate([
     "$group": {"_id": "$maker",
        "lowest_level": {"$min": "$level_required"}}},
 ])
+
+db.wands.aggregate([{
+  $match: {"price": {"$lt": 50}}
+},{
+  $group: {"_id": "$maker",
+          "average_magic": {"$avg": "$damage.magic"}}
+},{
+  $match: {"average_magic": {"$gt": 40}}
+}])
