@@ -124,3 +124,11 @@ db.wands.aggregate([
   "price_average": {"$avg": "$price"}           
   }}
 ])
+
+db.wands.aggregate([
+  {"$group": {"_id": "$maker",
+   "total_wands": {"$sum": 1}, 
+   "max_magic": {"$max": "$damage.magic"},
+   "lowest_price": {"$min": "$price"}
+  }}
+])
