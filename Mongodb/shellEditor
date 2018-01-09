@@ -93,3 +93,7 @@ db.wands.find(
     "lengths": {"$elemMatch": {"$gte": 3, "$lte": 4}}
   }
 )
+
+db.wands.find(
+  {},
+{"name": true}).sort({"name": 1})
