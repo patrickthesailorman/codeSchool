@@ -15,14 +15,16 @@
         {{product.name}}
         <em class="pull-right">{{product.price | currency}}</em>
       </h3>
-      <section ng-show="product.images.length">
-        <img ng-src="{{product.images[0]}}" />
+
+      <!-- Image Gallery  -->
+      <div class='gallery' ng-controller="GalleryController as gallery" ng-show="product.images.length">
+        <img ng-src="{{product.images[gallery.current]}}" />
         <ul class="list-inline thumbs">
           <li class="thumbnail" ng-repeat="image in product.images">
             <img ng-src="{{image}}" />
           </li>
         </ul>
-      </section>
+      </div>
 
       <section class="tab" ng-controller="TabController as tab">
         <ul class="nav nav-pills">
@@ -43,7 +45,6 @@
         </div>
         <div ng-show="tab.isSet(3)">
           <h4>Reviews</h4>
-          <blockquote></blockquote>
         </div>
       </section>
     </div>
