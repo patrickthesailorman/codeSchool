@@ -46,8 +46,7 @@
           </ul>
 
           <!--  Description Tab's Content  -->
-          <div ng-show="tab.isSet(1)" ng-include="'product-description.html'">
-            
+          <product-description ng-show="tab.isSet(1)" </product-description>
           </div>
 
           <!--  Spec Tab's Content  -->
@@ -80,7 +79,7 @@
                   {{review.body}}
                   <cite class="clearfix">—{{review.author}}</cite>
                 </blockquote>
-              </li>  
+              </li>
             </ul>
 
             <!--  Review Form -->
@@ -111,10 +110,8 @@
               </fieldset>
             </form>
           </div>
-
         </section>
       </div>
-
     </div>
   </body>
 </html>
