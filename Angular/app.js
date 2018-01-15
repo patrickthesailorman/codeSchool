@@ -139,3 +139,4 @@ app.directive('productTabs', function() {
     }
   ];
 })();
+
